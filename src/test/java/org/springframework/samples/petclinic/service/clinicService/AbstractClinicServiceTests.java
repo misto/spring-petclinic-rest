@@ -24,6 +24,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -485,7 +486,7 @@ abstract class AbstractClinicServiceTests {
         Specialty specialty3 = new Specialty();
         specialty3.setName("dentistry");
         specialty3.setId(3);
-        List<Specialty> expectedSpecialties = List.of(specialty1, specialty2, specialty3);
+        List<Specialty> expectedSpecialties = Arrays.asList(specialty1, specialty2, specialty3);
         Set<String> specialtyNames = expectedSpecialties.stream()
             .map(Specialty::getName)
             .collect(Collectors.toSet());

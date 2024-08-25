@@ -402,9 +402,9 @@ class OwnerRestControllerTests {
         owners.remove(0);
         owners.remove(1);
         given(this.clinicService.findAllOwners()).willReturn(ownerMapper.toOwners(owners));
-        var owner = ownerMapper.toOwner(owners.get(0));
+        Owner owner = ownerMapper.toOwner(owners.get(0));
         given(this.clinicService.findOwnerById(2)).willReturn(owner);
-        var pet = petMapper.toPet(pets.get(0));
+        Pet pet = petMapper.toPet(pets.get(0));
         pet.setOwner(owner);
         given(this.clinicService.findPetById(1)).willReturn(pet);
         this.mockMvc.perform(get("/api/owners/2/pets/1")

@@ -34,8 +34,20 @@
         <docker.jib-maven-plugin.version>3.4.0</docker.jib-maven-plugin.version>
         <docker.image.prefix>springcommunity</docker.image.prefix>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
-        <maven.compiler.release>17</maven.compiler.release>
+        <java.version>8</java.version>
     </properties>
+
+    <profiles>
+        <profile>
+        <id>set-compiler-release</id>
+        <activation>
+            <jdk>[9,)</jdk>
+        </activation>
+        <properties>
+            <maven.compiler.release>${java.version}</maven.compiler.release>
+        </properties>
+        </profile>
+    </profiles>
 
     <dependencies>
         <dependency>
@@ -177,7 +189,6 @@
                             <additionalProperties>
                                 <encoding.source>${project.build.sourceEncoding}</encoding.source>
                                 <encoding.reporting>${project.reporting.outputEncoding}</encoding.reporting>
-                                <java.release>${maven.compiler.release}</java.release>
                             </additionalProperties>
                         </configuration>
                     </execution>
@@ -319,6 +330,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven-compiler-plugin.version}</version>
                 <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.mapstruct</groupId>
